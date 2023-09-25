@@ -27,7 +27,7 @@ public class Login {
     public static Users Server(Socket conexaoC) throws IOException {
         Input inp = new Input(conexaoC);
         String nameL = inp.InputLogin();
-
+            
         Users newUser = new Users(nameL, conexaoC);
         return newUser;
     }

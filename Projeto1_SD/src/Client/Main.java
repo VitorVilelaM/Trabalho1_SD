@@ -1,19 +1,25 @@
 package Client;
 
+import Chat.ChatController;
+import java.io.IOException;
+import java.net.Socket;
+
 /**
  *
  * @author vitor
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         Connection connection = new Connection();
-        
-        connection.ConnectionServer();
-        System.out.println("Voltei Main");
+        Socket conexao = connection.ConnectionServer();
+
+        while (true) {
+            if (conexao != null) {
+                ChatController chat = new ChatController();
+                chat.Client(conexao);
+            }
+        }
     }
 
 }

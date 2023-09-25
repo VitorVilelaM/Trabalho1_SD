@@ -30,10 +30,9 @@ public class Output extends Thread {
             try {
                 fluxoSaida.writeUTF(msg);
             } catch (IOException ex) {
-                System.out.println("Erro na comuunicação com o servidor!");
+                System.out.println("Erro na comunicação com o servidor!");
             }
         }
-
     }
 
     public void OutputLogin() throws IOException {

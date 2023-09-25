@@ -3,8 +3,6 @@ package Data;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,11 +25,15 @@ public class Input extends Thread {
                 String mensagem = fluxoEntrada.readUTF();
                 System.out.println(mensagem);
             } catch (IOException ex) {
-                System.out.println("Erro na comuunicação com o servidor!");
+                System.out.println("Erro na comunicação com o servidor!");
             }
         }
     }
 
+    public void startChat(Socket client){
+        
+    }
+    
     public String InputLogin() throws IOException {
         String mensagem = fluxoEntrada.readUTF();
         return mensagem;
