@@ -20,6 +20,7 @@ public class Connection {
         try {
             Socket conexao = new Socket(ip, porta);
             Login.Client(conexao);
+            System.out.println("Voltei");
             
         } catch (Exception e) {
             System.out.println("Servidor nao esta no ar...");

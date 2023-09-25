@@ -13,6 +13,7 @@ public class Main {
         Connection connection = new Connection();
         
         connection.ConnectionServer();
+        System.out.println("Voltei Main");
     }
 
 }

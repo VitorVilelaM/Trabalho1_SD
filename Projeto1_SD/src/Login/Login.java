@@ -18,15 +18,15 @@ public class Login {
 
     public static void Client(Socket conexaoS) throws IOException {
         Scanner sc = new Scanner(System.in);
-        Output out = new Output();
+        Output out = new Output(conexaoS);
 
         System.out.print("Informe seu nome para Login: ");
-        out.Output(conexaoS);
+        out.OutputLogin();
     }
 
     public static Users Server(Socket conexaoC) throws IOException {
-        Input inp = new Input();
-        String nameL = inp.Input(conexaoC);
+        Input inp = new Input(conexaoC);
+        String nameL = inp.InputLogin();
 
         Users newUser = new Users(nameL, conexaoC);
         return newUser;

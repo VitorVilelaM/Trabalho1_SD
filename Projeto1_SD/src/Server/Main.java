@@ -14,8 +14,7 @@ public class Main {
     public static void main(String[] args) throws IOException{
         Connections connections = new Connections();
         connections.start();
-        
-        while(true){         
+        while(true){
         }
     }
 

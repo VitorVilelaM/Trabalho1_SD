@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,23 +14,31 @@ import java.util.Scanner;
  */
 public class Output extends Thread {
 
-    public Output() {
+    private Socket conexao;
+    private DataOutputStream fluxoSaida;
+    Scanner sc = new Scanner(System.in);
+
+    public Output(Socket conexao) throws IOException {
+        this.conexao = conexao;
+        fluxoSaida = new DataOutputStream(conexao.getOutputStream());
     }
 
     @Override
     public void run() {
         while (true) {
-            System.out.println("OUTPUT");
+            String msg = sc.nextLine();
+            try {
+                fluxoSaida.writeUTF(msg);
+            } catch (IOException ex) {
+                System.out.println("Erro na comuunicação com o servidor!");
+            }
         }
+
     }
 
-    public void Output(Socket conexao) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        DataOutputStream fluxoSaida = new DataOutputStream(conexao.getOutputStream());
-        while (true) {
-            String msg = sc.nextLine();
-            fluxoSaida.writeUTF(msg);
-        }
+    public void OutputLogin() throws IOException {
+        String msg = sc.nextLine();
+        fluxoSaida.writeUTF(msg);
     }
 
 }
