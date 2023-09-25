@@ -12,11 +12,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException{
-        Connections connection = new Connections();
-        connection.start();
+        Connections connections = new Connections();
+        connections.start();
         
         while(true){         
-            connection.showUsers();
         }
     }
 

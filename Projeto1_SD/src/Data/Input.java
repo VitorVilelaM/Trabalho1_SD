@@ -9,23 +9,14 @@ import java.net.Socket;
  * // * @author vitor
  */
 public class Input extends Thread {
-    
-    public Input(){}
-    
-    @Override
-    public void run(){
-        while(true){
-            System.out.println("INPUT");
-        }
+
+    public Input() {
     }
-    
-    /*
-    public void Input(Socket conexao) throws IOException {
+
+    public String Input(Socket conexao) throws IOException {
         DataInputStream fluxoEntrada = new DataInputStream(conexao.getInputStream());
-        while (true) {
-            String mensagem = fluxoEntrada.readUTF();
-            System.out.println("" + mensagem);
-        }
+        String mensagem = fluxoEntrada.readUTF();
+        return mensagem;
     }
-     */
+
 }

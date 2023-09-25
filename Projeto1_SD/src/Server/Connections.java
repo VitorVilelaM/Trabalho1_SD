@@ -1,5 +1,6 @@
 package Server;
 
+import Login.Login;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,9 +24,12 @@ public class Connections extends Thread {
             Socket conexao;
             try {
                 conexao = servidor.accept();
-                Users newUser = new Users(login, conexao);
+                
+                Users newUser = Login.Server(conexao);
+                
                 users.add(newUser);
-                System.out.println("Conectado");
+                System.out.println(newUser.getName() + " " + "Conectado");
+                showUsers();
             } catch (IOException ex) {
                 System.out.println("Erro na conexão!");
             }

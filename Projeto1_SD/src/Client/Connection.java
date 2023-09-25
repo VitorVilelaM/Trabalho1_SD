@@ -1,8 +1,8 @@
 package Client;
 
+import Login.Login;
 import java.net.Socket;
 import java.util.Scanner;
-
 /**
  *
  * @author vitor
@@ -19,11 +19,8 @@ public class Connection {
 
         try {
             Socket conexao = new Socket(ip, porta);
-            System.out.print("Informe seu nome para Login: ");
+            Login.Client(conexao);
             
-            String name = sc.nextLine();
-            
-        
         } catch (Exception e) {
             System.out.println("Servidor nao esta no ar...");
         }

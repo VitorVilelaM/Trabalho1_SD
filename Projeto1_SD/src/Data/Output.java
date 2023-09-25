@@ -10,23 +10,19 @@ import java.util.Scanner;
  *
  * @author 202011020022
  */
-public class Output extends Thread{
-    private Users conexao;
-    
-    public Output(Users newUser){
-        this.conexao = newUser;
+public class Output extends Thread {
+
+    public Output() {
     }
-    
-    
+
     @Override
-    public void run(){
-        while(true){
+    public void run() {
+        while (true) {
             System.out.println("OUTPUT");
         }
     }
-    
-    
-        public void Output(Socket conexao) throws IOException {
+
+    public void Output(Socket conexao) throws IOException {
         Scanner sc = new Scanner(System.in);
         DataOutputStream fluxoSaida = new DataOutputStream(conexao.getOutputStream());
         while (true) {
@@ -34,5 +30,5 @@ public class Output extends Thread{
             fluxoSaida.writeUTF(msg);
         }
     }
-    
+
 }

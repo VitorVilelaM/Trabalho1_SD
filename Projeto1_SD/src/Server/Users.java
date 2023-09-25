@@ -22,7 +22,4 @@ public class Users {
     public Socket getConexao() {
         return conexao;
     }
-    
-    
-    
 }
