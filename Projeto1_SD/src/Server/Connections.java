@@ -26,7 +26,7 @@ public class Connections extends Thread {
                 users.add(newUser);
                 System.out.println(newUser.getName() + " " + "Conectado");
                 listenUser(conexao, newUser);
-                
+
             } catch (IOException ex) {
                 System.out.println("Erro na conexão!");
             }
@@ -46,12 +46,5 @@ public class Connections extends Thread {
 
     public Connections() throws IOException {
         this.servidor = new ServerSocket(1234);
-    }
-
-    public void showUsers() {
-        for (Users user : users) {
-            System.out.println(user.getName());
-        }
-        System.out.println("");
     }
 }

@@ -16,8 +16,6 @@ public class ChatController {
     public void Client(Socket conexao) throws IOException{
         Input inp = new Input(conexao);
         Output out = new Output(conexao);
-        
-        //inp.run();
         out.run();
     }
     

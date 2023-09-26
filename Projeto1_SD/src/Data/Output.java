@@ -35,9 +35,15 @@ public class Output extends Thread {
         }
     }
 
-    public void OutputLogin() throws IOException {
+    public void OutputLoginClient() throws IOException {
+        System.out.print("Informe seu nome para Login: ");
         String msg = sc.nextLine();
         fluxoSaida.writeUTF(msg);
     }
 
+    public void OutputLoginServer() throws IOException {
+        String msg = "Sucesso no login!";
+        fluxoSaida.writeUTF(msg);
+    }
+    
 }

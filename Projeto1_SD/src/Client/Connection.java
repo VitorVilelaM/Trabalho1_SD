@@ -22,7 +22,6 @@ public class Connection {
         try {
             conexao = new Socket(ip, porta);
             Login.Client(conexao);
-            System.out.println("Conectado com Sucesso!");
         } catch (Exception e) {
             System.out.println("Servidor nao esta no ar...");
         }

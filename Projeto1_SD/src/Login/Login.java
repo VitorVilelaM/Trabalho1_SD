@@ -18,17 +18,22 @@ public class Login {
 
     public static void Client(Socket conexaoS) throws IOException {
         Scanner sc = new Scanner(System.in);
-        Output out = new Output(conexaoS);
-
-        System.out.print("Informe seu nome para Login: ");
-        out.OutputLogin();
+        
+        Output outClient = new Output(conexaoS);
+        Input inpClient = new Input(conexaoS);
+        
+        outClient.OutputLoginClient();
+        System.out.println(inpClient.InputLogin());
     }
 
     public static Users Server(Socket conexaoC) throws IOException {
-        Input inp = new Input(conexaoC);
-        String nameL = inp.InputLogin();
-            
+        Input inpServer = new Input(conexaoC);
+        Output outServer = new Output(conexaoC);
+        
+        String nameL = inpServer.InputLogin();
         Users newUser = new Users(nameL, conexaoC);
+        
+        outServer.OutputLoginServer();
         return newUser;
     }
 }

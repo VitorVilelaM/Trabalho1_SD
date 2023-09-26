@@ -12,26 +12,24 @@ public class Input extends Thread {
 
     private Socket conexao;
     private DataInputStream fluxoEntrada;
+    private boolean loop;
 
     public Input(Socket conexao) throws IOException {
         this.conexao = conexao;
         this.fluxoEntrada = new DataInputStream(conexao.getInputStream());
+        this.loop = true;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (this.loop) {
             try {
                 String mensagem = fluxoEntrada.readUTF();
                 System.out.println(mensagem);
             } catch (IOException ex) {
-                System.out.println("Erro na comunicação com o servidor!");
+                this.loop = false;
             }
         }
-    }
-
-    public void startChat(Socket client){
-        
     }
     
     public String InputLogin() throws IOException {
