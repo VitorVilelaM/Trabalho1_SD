@@ -1,5 +1,6 @@
 package Client;
 
+import Data.Output;
 import Login.Login;
 import java.net.Socket;
 import java.util.Scanner;
@@ -22,6 +23,9 @@ public class Connection {
         try {
             conexao = new Socket(ip, porta);
             Login.Client(conexao);
+            Output outServer = new Output(conexao);
+            outServer.run();
+            
         } catch (Exception e) {
             System.out.println("Servidor nao esta no ar...");
         }

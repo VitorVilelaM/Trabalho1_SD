@@ -15,6 +15,8 @@ public class Login {
 
     public Login() {
     }
+    
+    // Transformar em Threads
 
     public static void Client(Socket conexaoS) throws IOException {
         Scanner sc = new Scanner(System.in);

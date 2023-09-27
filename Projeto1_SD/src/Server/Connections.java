@@ -22,7 +22,9 @@ public class Connections extends Thread {
             Socket conexao;
             try {
                 conexao = servidor.accept();
+                System.out.println("oi");
                 Users newUser = Login.Server(conexao);
+                
                 users.add(newUser);
                 System.out.println(newUser.getName() + " " + "Conectado");
                 listenUser(conexao, newUser);
@@ -36,8 +38,8 @@ public class Connections extends Thread {
 
     public void listenUser(Socket conexao, Users user) throws IOException {
         System.out.println("Mensagem do " + user.getName() + ":");
-        Input inp = new Input(conexao);
-        inp.run();
+        Input inp = new Input(user.getConexao());
+        inp.start();
     }
 
     public ArrayList<Users> getUsers() {

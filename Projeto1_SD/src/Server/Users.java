@@ -10,7 +10,7 @@ public class Users {
     private String name;
     private Socket conexao;
     
-    public Users(String name, Socket port){
+    public Users(String name, Socket conexao){
         this.name = name;
         this.conexao = conexao;
     }
