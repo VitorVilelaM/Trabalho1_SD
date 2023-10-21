@@ -6,13 +6,14 @@ import java.net.Socket;
 
 /**
  *
- * // * @author vitor
+ * @author vitor
  */
 public class Input extends Thread {
 
     private Socket conexao;
     private DataInputStream fluxoEntrada;
     private boolean loop;
+    private String msg = "";
 
     public Input(Socket conexao) throws IOException {
         this.conexao = conexao;
@@ -23,15 +24,31 @@ public class Input extends Thread {
     @Override
     public void run() {
         while (this.loop) {
-            try {
-                String mensagem = fluxoEntrada.readUTF();
-                System.out.println(mensagem);
-            } catch (IOException ex) {
-                this.loop = false;
-            }
+            readMsg();
         }
     }
-    
+
+    public synchronized void readMsg() {
+        try {
+            msg = fluxoEntrada.readUTF();
+            System.out.println(msg);
+            
+            if(!(msg.isEmpty())){
+                notifyAll();
+            }
+        } catch (IOException ex) {
+            this.loop = false;
+        }
+    }
+
+    public void getConexao() {
+        System.out.println(conexao.getPort());
+    }
+
+    public String getMsg() {
+        return this.msg;
+    }
+
     public String InputLogin() throws IOException {
         String mensagem = fluxoEntrada.readUTF();
         return mensagem;

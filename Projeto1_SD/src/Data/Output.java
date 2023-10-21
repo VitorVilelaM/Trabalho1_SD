@@ -1,12 +1,9 @@
 package Data;
 
-import Server.Users;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +13,8 @@ public class Output extends Thread {
 
     private Socket conexao;
     private DataOutputStream fluxoSaida;
+    private String msg = "";
+
     Scanner sc = new Scanner(System.in);
 
     public Output(Socket conexao) throws IOException {
@@ -23,10 +22,19 @@ public class Output extends Thread {
         fluxoSaida = new DataOutputStream(conexao.getOutputStream());
     }
 
+    public void send() {
+        try {
+            fluxoSaida.writeUTF(msg);
+            this.msg = "";
+        } catch (IOException ex) {
+            System.out.println("Erro na comunicação com o cliente");
+        }
+    }
+
     @Override
     public void run() {
         while (true) {
-            String msg = sc.nextLine();
+                this.msg = sc.nextLine();
             try {
                 fluxoSaida.writeUTF(msg);
             } catch (IOException ex) {
@@ -35,6 +43,10 @@ public class Output extends Thread {
         }
     }
 
+    public void setMsg(String men) {
+        this.msg = men;
+    }
+    
     public void OutputLoginClient() throws IOException {
         System.out.print("Informe seu nome para Login: ");
         String msg = sc.nextLine();
@@ -45,5 +57,5 @@ public class Output extends Thread {
         String msg = "Sucesso no login!";
         fluxoSaida.writeUTF(msg);
     }
-    
+
 }
