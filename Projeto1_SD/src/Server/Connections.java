@@ -26,23 +26,19 @@ public class Connections extends Thread {
 
                 users.add(newUser);
                 System.out.println(newUser.getName() + " " + "Conectado" + " - Porta: " + conexao.getPort());
-                listenUser(conexao, newUser);
+                listenUser(newUser);
                 
             } catch (IOException ex) {
                 System.out.println("Erro na conexão!");
+                break;
             }
         }
 
     }
     
-    private void listenUser(Socket conexao, Users user) throws IOException {
-        Input inp = new Input(conexao);
-        Output out = new Output(conexao);
+    private void listenUser(Users user) throws IOException {
         
-        inp.start();
-        out.start();
-        
-       Menu menu = new Menu(inp, out, this);
+       Menu menu = new Menu(user,this);
        menu.start();
     }
     

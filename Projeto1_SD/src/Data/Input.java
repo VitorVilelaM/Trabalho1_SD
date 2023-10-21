@@ -38,9 +38,6 @@ public class Input extends Thread {
             msg = fluxoEntrada.readUTF();
             System.out.println(msg);
             
-            if(!(msg.isEmpty())){
-                notifyAll();
-            }
         } catch (IOException ex) {
             this.loop = false;
         }

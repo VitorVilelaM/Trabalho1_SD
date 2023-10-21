@@ -1,24 +1,47 @@
 package Chat;
 
-import Data.Input;
-import Data.Output;
+import Server.Users;
 import java.io.IOException;
-import java.net.Socket;
+import java.util.Scanner;
 
 /**
  *
  * @author vitor
  */
-public class ChatController {
-    
-    public ChatController(){}
-    
-    public void Client(Socket conexao) throws IOException{
-        Input inp = new Input(conexao);
-        Output out = new Output(conexao);
-        out.run();
+public class ChatController extends Thread {
+
+    String msgSend, msgReceive;
+    private Users usr1, usr2;
+    Scanner sc = new Scanner(System.in);
+
+    public ChatController(Users sender, Users receiver) {
+        this.usr1 = sender;
+        this.usr2 = receiver;
     }
-    
-    public void Server(){}
-    
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                send();
+            } catch (Exception ex) {
+                break;
+            }
+        }
+    }
+
+    public void send() throws IOException {
+        msgSend = usr1.getInput().getMsg();
+
+        if (!(msgSend.isEmpty())) {
+            usr2.getOutput().setMsg(usr1.getName() + ": " + msgSend);
+            usr2.getOutput().send();
+
+            usr1.getInput().setMsg("");
+        }
+    }
+
+    public void receive() {
+    }
+
 }

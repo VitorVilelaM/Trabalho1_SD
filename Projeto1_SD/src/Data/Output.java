@@ -22,19 +22,15 @@ public class Output extends Thread {
         fluxoSaida = new DataOutputStream(conexao.getOutputStream());
     }
 
-    public void send() {
-        try {
-            fluxoSaida.writeUTF(msg);
-            this.msg = "";
-        } catch (IOException ex) {
-            System.out.println("Erro na comunicação com o cliente");
-        }
+    public void send() throws IOException {
+        fluxoSaida.writeUTF(msg);
+        this.msg = "";
     }
 
     @Override
     public void run() {
         while (true) {
-                this.msg = sc.nextLine();
+            this.msg = sc.nextLine();
             try {
                 fluxoSaida.writeUTF(msg);
             } catch (IOException ex) {
@@ -46,7 +42,7 @@ public class Output extends Thread {
     public void setMsg(String men) {
         this.msg = men;
     }
-    
+
     public void OutputLoginClient() throws IOException {
         System.out.print("Informe seu nome para Login: ");
         String msg = sc.nextLine();
