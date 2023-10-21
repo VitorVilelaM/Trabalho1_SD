@@ -13,12 +13,17 @@ public class Input extends Thread {
     private Socket conexao;
     private DataInputStream fluxoEntrada;
     private boolean loop;
+
     private String msg = "";
 
     public Input(Socket conexao) throws IOException {
         this.conexao = conexao;
         this.fluxoEntrada = new DataInputStream(conexao.getInputStream());
         this.loop = true;
+    }
+
+    public DataInputStream getFluxoEntrada() {
+        return fluxoEntrada;
     }
 
     @Override
@@ -45,6 +50,10 @@ public class Input extends Thread {
         System.out.println(conexao.getPort());
     }
 
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
     public String getMsg() {
         return this.msg;
     }

@@ -15,15 +15,13 @@ public class Login {
 
     public Login() {
     }
-    
-    // Transformar em Threads
 
     public static void Client(Socket conexaoS) throws IOException {
         Scanner sc = new Scanner(System.in);
         
         Output outClient = new Output(conexaoS);
         Input inpClient = new Input(conexaoS);
-        
+       
         outClient.OutputLoginClient();
         System.out.println(inpClient.InputLogin());
     }

@@ -28,7 +28,6 @@ public class Connections extends Thread {
                 System.out.println(newUser.getName() + " " + "Conectado" + " - Porta: " + conexao.getPort());
                 listenUser(conexao, newUser);
                 
-                
             } catch (IOException ex) {
                 System.out.println("Erro na conexão!");
             }
