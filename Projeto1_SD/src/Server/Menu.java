@@ -22,7 +22,6 @@ public class Menu extends Thread {
 
     @Override
     public void run() {
-
         try {
             menuStarter();
         } catch (IOException ex) {
@@ -47,15 +46,17 @@ public class Menu extends Thread {
         }
     }
 
-    private void removeUser() {
+    private void removeUser() throws IOException {
         int i = 0;
         while (i < server.getUsers().size()) {
             if ((user.getName().equals(server.getUsers().get(i).getName()))) {
+                server.getUsers().get(i).getConexao().close();
                 server.getUsers().remove(i);
                 break;
             }
             i++;
         }
+
     }
 
     private void menuUsers() throws IOException {
@@ -79,7 +80,7 @@ public class Menu extends Thread {
                 }
 
                 if (search) {
-                    chat = new ChatController(user, server.getUsers().get(i));
+                    chat = new ChatController(user, server.getUsers().get(i), server);
                     chat.start();
                     user.getInput().setMsg("");
 
@@ -103,7 +104,9 @@ public class Menu extends Thread {
         String users = "";
 
         for (Users user : server.getUsers()) {
-            users += user.getName() + "\n";
+            if (user != this.user) {
+                users += user.getName() + "\n";
+            }
         }
 
         user.getOutput().setMsg("--- Usuários online ---" + "\n" + users);

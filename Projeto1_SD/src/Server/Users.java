@@ -9,6 +9,7 @@ import java.net.Socket;
  * @author vitor
  */
 public class Users {
+    
     private String name;
     private Socket conexao;
     private Input input;
@@ -22,12 +23,15 @@ public class Users {
         this.output = new Output(conexao);
         
         input.start();
-        output.start();
-        
+        output.start();       
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setConexao(Socket conexao) {
+        this.conexao = conexao;
     }
 
     public Socket getConexao() {

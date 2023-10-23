@@ -1,5 +1,7 @@
 package Chat;
 
+import Server.Connections;
+import Server.Menu;
 import Server.Users;
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,18 +12,23 @@ import java.util.Scanner;
  */
 public class ChatController extends Thread {
 
-    String msgSend, msgReceive;
+    private String msgSend, msgReceive, chat = "";
     private Users usr1, usr2;
-    Scanner sc = new Scanner(System.in);
-
-    public ChatController(Users sender, Users receiver) {
+    private boolean repeat = true;
+    private Scanner sc = new Scanner(System.in);
+    private Menu menu;
+    private Connections server;
+    
+    
+    public ChatController(Users sender, Users receiver, Connections ser) {
         this.usr1 = sender;
         this.usr2 = receiver;
+        this.server = ser;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (this.repeat) {
             try {
                 send();
             } catch (Exception ex) {
@@ -34,8 +41,16 @@ public class ChatController extends Thread {
         msgSend = usr1.getInput().getMsg();
 
         if (!(msgSend.isEmpty())) {
-            usr2.getOutput().setMsg(usr1.getName() + ": " + msgSend);
-            usr2.getOutput().send();
+
+            if (msgSend.equals("MENU")) {
+                this.repeat = false;
+                menu = new Menu(usr1, server);
+                menu.start();
+            } else {
+                chat += usr1.getName() + ": " + msgSend + "\n";
+                usr2.getOutput().setMsg(chat);
+                usr2.getOutput().send();
+            }
 
             usr1.getInput().setMsg("");
         }

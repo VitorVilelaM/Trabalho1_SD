@@ -30,11 +30,12 @@ public class Output extends Thread {
     @Override
     public void run() {
         while (true) {
-            this.msg = sc.nextLine();
             try {
+                this.msg = sc.nextLine();
                 fluxoSaida.writeUTF(msg);
             } catch (IOException ex) {
                 System.out.println("Erro na comunicação com o servidor!");
+                break;
             }
         }
     }
@@ -49,8 +50,7 @@ public class Output extends Thread {
         fluxoSaida.writeUTF(msg);
     }
 
-    public void OutputLoginServer() throws IOException {
-        String msg = "Sucesso no login!";
+    public void OutputLoginServer(String msg) throws IOException {
         fluxoSaida.writeUTF(msg);
     }
 

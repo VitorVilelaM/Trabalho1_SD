@@ -5,7 +5,7 @@ import Data.Output;
 import Login.Login;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Scanner;
+
 /**
  *
  * @author vitor
@@ -20,13 +20,11 @@ public class Connection extends Thread {
     public Socket ConnectionServer() {
         int porta = 1234;
         String ip = "localhost";
-
-        Scanner sc = new Scanner(System.in);
-
+        
         try {
             this.conexao = new Socket(ip, porta);
             Login.Client(conexao);
-
+           
         } catch (Exception e) {
             System.out.println("Servidor nao esta no ar...");
         }
@@ -36,7 +34,7 @@ public class Connection extends Thread {
 
     @Override
     public void run() {
-         
+
         try {
             Output outServer = new Output(conexao);
             Input inpServer = new Input(conexao);
